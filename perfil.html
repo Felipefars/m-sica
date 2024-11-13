@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="perfil/perfil.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .profile-pic img {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .profile-pic {
+            text-align: center;
+        }
+
+        .save-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
+        .saida {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .saida:hover {
+            background-color: #e53935;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="perfil">
+            <i class="ri-user-fill"></i>
+            <span>Perfil</span>
+        </div>
+
+        <div class="logo">
+            <a href="index.html">
+                <img src="./inicial/Images/logo.jpg" alt="Logo">
+            </a>
+        </div>
+
+        <div class="settings-icon">
+            <i class="ri-settings-5-fill"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Editar Perfil</h1>
+        </div>
+        
+        <form>
+            <div class="profile-pic">
+                <label for="profile-picture">
+                    <div class="perfil">
+                        <i class="ri-user-fill"></i>
+                        <span>Alterar Foto de Perfil</span>
+                    </div>
+                    <input type="file" id="profile-picture" accept="image/*" onchange="loadProfileImage(event)">
+                    <div id="profile-preview"></div>
+                </label>
+            </div>
+
+            <label for="username">Nome do usuário</label>
+            <input type="text" id="username" placeholder="Ex: João da Silva">
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="Ex: joao@email.com">
+
+            <label for="dob">Data de nascimento</label>
+            <input type="date" id="dob" value="">
+
+            <label for="region">País - Região</label>
+            <input type="text" id="region" placeholder="Ex: Brasil - São Paulo">
+
+            <button type="submit" class="save-button">Salvar</button>
+            <br>
+            <button class="saida" type="button" onclick="logout()">Sair</button>
+        </form>
+    </div>
+
+    <script>
+        function loadProfileImage(event) {
+            const preview = document.getElementById('profile-preview');
+            preview.innerHTML = '';
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('usuarioLogado');
+            window.location.href = 'Entrar.html';
+        }
+
+        window.onload = function() {
+            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+            if (!usuarioLogado) {
+                window.location.href = 'Entrar.html';
+            } else {
+                document.getElementById('username').value = usuarioLogado.nome;
+                document.getElementById('email').value = usuarioLogado.email;
+                document.getElementById('dob').value = usuarioLogado.dataNascimento;
+                document.getElementById('region').value = usuarioLogado.regiao;
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeats - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="inicial/style.css">
+    <style>
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .center-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil span {
+            font-size: 16px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .greeting {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .greeting span {
+            color: #4CAF50;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-icon {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-left">
+                <div class="perfil">
+                    <a href="perfil.html"><i class="ri-user-fill" style="color: white;"></i></a>
+                    <span>Perfil</span>
+                </div>
+                <div class="greeting">
+                    <h2>Olá, <span id="user-name">usuário</span>!</h2>
+                </div>
+            </div>
+
+            <div class="center-icon">
+                <img id="menu-button" class="menu-button" src="inicial/Images/logo.jpg" width="50px" alt="Icone-menu">
+            </div>
+
+            <div class="header-right">
+                <div class="settings-icon">
+                    <i class="ri-settings-5-fill"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-icon">
+            <nav class="nav">
+                <ul id="menu" class="menu">
+                    <li><a href="player.html"><span><img src="./inicial/Images/playlist.png" width="40px" alt="Playlist-icon"></span></a></li>
+                    <li><a href="registrar-musica.html"><span><img src="./inicial/Images/registro.png" width="40px" alt="Home-icon"></span></a></li>
+                    <li><a href="Historico.html"><span><img src="./inicial/Images/historico.jpg" width="40px" alt="History-icon"></span></a></li>
+                    <li><a href="curtidos.html"><span><img src="./inicial/Images/like.png" width="40px" alt="History-icon"></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisa">
+        </div>
+
+        <section class="recommendations">
+            <h2>Recomendações</h2>
+            <div class="genres">
+                <div class="genre">Sertanejo</div>
+                <div class="genre">Pop Music</div>
+                <div class="genre">Pagode</div>
+                <div class="genre">Jazz</div>
+                <div class="genre">Country</div>
+            </div>
+        </section>
+
+        <section class="popular-artists">
+            <h2>Artistas Populares</h2>
+            <div class="artists">
+                <div class="artist"><img src="inicial/Images/50cent.jpg" alt="Artista 1"></div>
+                <div class="artist"><img src="inicial/Images/frank.jpg" alt="Artista 2"></div>
+                <div class="artist"><img src="inicial/Images/laufey.jpg" alt="Artista 3"></div>
+                <div class="artist"><img src="inicial/Images/charles.png" alt="Artista 4"></div>
+                <div class="artist"><img src="inicial/Images/tupac.jpg" alt="Artista 5"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const menu = document.getElementById('menu');
+        const userNameElement = document.getElementById('user-name');
+
+        menuButton.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        function verifyUser() {
+            let usuarioLogado = sessionStorage.getItem('usuarioLogado');
+            if (!usuarioLogado) {
+                window.location.href = 'index.html';
+            } else {
+                let usuario = JSON.parse(usuarioLogado);
+                userNameElement.textContent = usuario.nome || 'usuário';
+            }
+        }
+
+        window.onload = function() {
+            verifyUser();
+        }
+    </script>
+</body>
+</html>

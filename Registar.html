@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CodeBeats - Sign up</title>
+        <link rel="stylesheet" href="registrar/style.css">
+        <script src="registrar/Registar.js" defer></script>
+    </head>
+    <body>
+        <header class="navbar">
+            <h1>CodeBeats</h1>
+            <nav></nav>
+        </header>
+
+        <main>
+            <section class="sobre">
+                <div class="container">
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email">
+                    <label for="password">Password</label>
+                    <input type="password" id="password">
+                    <label for="password01">Confirm password</label>
+                    <input type="password" id="password01">
+                    <p id="erro"></p>
+                    <p id="certo"></p>
+                    <button onclick="signUp()">Registrar-se</button>
+                    <button onclick="location.href='./Entrar.html'">voltar</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CodeBeats. Todos os direitos reservados.</p>
+        </footer>
+    </body>
+</html>
